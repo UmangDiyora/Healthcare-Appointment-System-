@@ -38,6 +38,7 @@ public class AppointmentService {
     private final DoctorRepository doctorRepository;
     private final DoctorAvailabilityRepository availabilityRepository;
     private final AuditService auditService;
+    private final NotificationService notificationService;
 
     @Auditable(action = "CREATE", entityType = "APPOINTMENT")
     @Transactional
@@ -93,7 +94,11 @@ public class AppointmentService {
 
         appointment = appointmentRepository.save(appointment);
 
-        // 8. Audit log
+        // 8. Send notifications
+        notificationService.sendAppointmentConfirmation(appointment);
+        notificationService.scheduleReminder(appointment, 24); // 24 hours before
+
+        // 9. Audit log
         auditService.log(currentUser, "CREATE", "APPOINTMENT", appointment.getId());
 
         log.info("Appointment booked: {} for patient: {} with doctor: {}",
@@ -244,6 +249,9 @@ public class AppointmentService {
         appointment.setStatus(AppointmentStatus.CANCELLED);
         appointment.setCancellationReason(request.getCancellationReason());
         appointment = appointmentRepository.save(appointment);
+
+        // Send cancellation notification
+        notificationService.sendAppointmentCancellation(appointment, request.getCancellationReason());
 
         auditService.log(currentUser, "UPDATE", "APPOINTMENT", appointmentId);
         log.info("Appointment cancelled: {} by user: {}", appointmentId, currentUser.getId());

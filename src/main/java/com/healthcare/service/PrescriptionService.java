@@ -32,6 +32,7 @@ public class PrescriptionService {
     private final DoctorRepository doctorRepository;
     private final AppointmentRepository appointmentRepository;
     private final AuditService auditService;
+    private final NotificationService notificationService;
 
     @Auditable(action = "CREATE", entityType = "PRESCRIPTION")
     @Transactional
@@ -74,7 +75,10 @@ public class PrescriptionService {
 
         prescription = prescriptionRepository.save(prescription);
 
-        // 6. Audit log
+        // 6. Send notification to patient
+        notificationService.notifyNewPrescription(prescription);
+
+        // 7. Audit log
         auditService.log(currentUser, "CREATE", "PRESCRIPTION", prescription.getId());
 
         log.info("Prescription created: {} for patient: {} by doctor: {}",

@@ -35,6 +35,7 @@ public class MedicalRecordService {
     private final AppointmentRepository appointmentRepository;
     private final S3Service s3Service;
     private final AuditService auditService;
+    private final NotificationService notificationService;
 
     private static final List<String> ALLOWED_FILE_TYPES = Arrays.asList(
             "application/pdf",
@@ -93,7 +94,10 @@ public class MedicalRecordService {
 
         record = medicalRecordRepository.save(record);
 
-        // 7. Audit log
+        // 7. Send notification to patient
+        notificationService.notifyNewMedicalRecord(record);
+
+        // 8. Audit log
         auditService.log(currentUser, "CREATE", "MEDICAL_RECORD", record.getId());
 
         log.info("Medical record uploaded: {} for patient: {} by doctor: {}",
