@@ -26,6 +26,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     List<Doctor> findBySpecialization(String specialization);
 
+    List<Doctor> findBySpecializationContainingIgnoreCase(String specialization);
+
     Page<Doctor> findBySpecialization(String specialization, Pageable pageable);
 
     @Query("SELECT d FROM Doctor d WHERE d.user.isActive = true AND d.isApproved = true")
