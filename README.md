@@ -1083,29 +1083,6 @@ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 ```
 
----
-
-## 📞 Contact
-
-### Project Information
-
-- **Project Link**: [GitHub Repository](https://github.com/yourusername/Healthcare-Appointment-System)
-- **Documentation**: [Wiki](https://github.com/yourusername/Healthcare-Appointment-System/wiki)
-- **Issue Tracker**: [Issues](https://github.com/yourusername/Healthcare-Appointment-System/issues)
-- **Discussions**: [Discussions](https://github.com/yourusername/Healthcare-Appointment-System/discussions)
-
-### Support
-
-- 📧 Email: support@healthcaresystem.com
-- 💬 Discord: [Join our community](https://discord.gg/healthcare)
-- 📱 Twitter: [@HealthcareApp](https://twitter.com/healthcareapp)
-
-### Maintainers
-
-- **Lead Developer** - [@yourusername](https://github.com/yourusername)
-
----
-
 ## 🙏 Acknowledgments
 
 Special thanks to:
@@ -1128,19 +1105,6 @@ If you find this project helpful, please consider:
 - Contributing to its development
 - Reporting bugs and suggesting features
 
----
-
-<div align="center">
-
-### 📊 Project Stats
-
-![GitHub stars](https://img.shields.io/github/stars/yourusername/Healthcare-Appointment-System?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/Healthcare-Appointment-System?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/yourusername/Healthcare-Appointment-System?style=social)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/Healthcare-Appointment-System)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/yourusername/Healthcare-Appointment-System)
-
----
 
 **Made with ❤️ by developers, for healthcare**
 
