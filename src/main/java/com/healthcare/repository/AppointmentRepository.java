@@ -24,6 +24,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     // Patient appointments
     List<Appointment> findByPatientId(Long patientId);
 
+    List<Appointment> findByPatientIdOrderByAppointmentDateDesc(Long patientId);
+
     List<Appointment> findByPatientIdAndStatus(Long patientId, Appointment.AppointmentStatus status);
 
     @Query("SELECT a FROM Appointment a WHERE a.patient.id = :patientId AND a.appointmentDate >= :fromDate ORDER BY a.appointmentDate, a.appointmentTime")
@@ -31,6 +33,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     // Doctor appointments
     List<Appointment> findByDoctorId(Long doctorId);
+
+    List<Appointment> findByDoctorIdOrderByAppointmentDateDesc(Long doctorId);
 
     List<Appointment> findByDoctorIdAndAppointmentDate(Long doctorId, LocalDate date);
 
@@ -49,6 +53,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     boolean checkAvailabilityWithLock(@Param("doctorId") Long doctorId,
                                      @Param("date") LocalDate date,
                                      @Param("time") LocalTime time);
+
+    // Find appointments excluding a specific status
+    List<Appointment> findByDoctorIdAndAppointmentDateAndStatusNot(
+        Long doctorId,
+        LocalDate appointmentDate,
+        Appointment.AppointmentStatus status
+    );
 
     // Check if slot is taken (without lock)
     boolean existsByDoctorIdAndAppointmentDateAndAppointmentTimeAndStatusNotIn(

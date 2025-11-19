@@ -21,6 +21,12 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     List<Notification> findByUserIdOrderByCreatedAtDesc(Long userId);
 
+    List<Notification> findByUserIdAndIsReadFalseOrderByCreatedAtDesc(Long userId);
+
+    List<Notification> findByIsReadTrueAndCreatedAtBefore(LocalDateTime dateTime);
+
+    List<Notification> findByScheduledTimeBetweenAndIsSentEmailFalse(LocalDateTime start, LocalDateTime end);
+
     @Query("SELECT n FROM Notification n WHERE n.user.id = :userId " +
            "AND n.isRead = false " +
            "ORDER BY n.createdAt DESC")

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.DayOfWeek;
 import java.util.List;
 
 /**
@@ -17,15 +16,15 @@ public interface DoctorAvailabilityRepository extends JpaRepository<DoctorAvaila
 
     List<DoctorAvailability> findByDoctorId(Long doctorId);
 
-    List<DoctorAvailability> findByDoctorIdAndDayOfWeek(Long doctorId, DayOfWeek dayOfWeek);
+    List<DoctorAvailability> findByDoctorIdAndDayOfWeek(Long doctorId, String dayOfWeek);
 
     @Query("SELECT da FROM DoctorAvailability da WHERE da.doctor.id = :doctorId AND da.dayOfWeek = :dayOfWeek AND da.isAvailable = true")
-    List<DoctorAvailability> findAvailableSlots(@Param("doctorId") Long doctorId, @Param("dayOfWeek") DayOfWeek dayOfWeek);
+    List<DoctorAvailability> findAvailableSlots(@Param("doctorId") Long doctorId, @Param("dayOfWeek") String dayOfWeek);
 
     @Query("SELECT da FROM DoctorAvailability da WHERE da.doctor.id = :doctorId AND da.isAvailable = true")
     List<DoctorAvailability> findAllAvailableSlotsByDoctor(@Param("doctorId") Long doctorId);
 
     void deleteByDoctorId(Long doctorId);
 
-    boolean existsByDoctorIdAndDayOfWeek(Long doctorId, DayOfWeek dayOfWeek);
+    boolean existsByDoctorIdAndDayOfWeek(Long doctorId, String dayOfWeek);
 }
